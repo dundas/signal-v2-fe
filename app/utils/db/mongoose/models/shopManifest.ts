@@ -24,4 +24,4 @@ const shopManifestSchema = new Schema({
     timestamps: true // adds createdAt and updatedAt fields
 });
 
-module.exports = mongoose.models.shopManifest || mongoose.model('shopManifest', shopManifestSchema);
+module.exports = mongoose.models.ShopManifest || mongoose.model('ShopManifest', shopManifestSchema);

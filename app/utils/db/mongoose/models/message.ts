@@ -27,7 +27,7 @@ const MessageSchema = new Schema({
     type: Date,
     default: Date.now,
   },
-  vectors: {
+  embedding: {
     type: [Number],
   },
   taskId: {
@@ -39,18 +39,7 @@ const MessageSchema = new Schema({
   status: {
     type: String
   },
-  projectId: {
-    type: String
-  },
-  taskStepId: {
-    type: String
-  },
-  codeBlockId: {
-    type: String
-  },
-  codeBaseFileId: {
-    type: String
-  },
+   
   replyMessageId: {
     type: String
   },

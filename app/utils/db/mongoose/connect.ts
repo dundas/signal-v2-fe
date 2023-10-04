@@ -10,7 +10,7 @@ export const connectDB = async (timeout = 30000) => {
   }
   try {
     await mongoose.connect(process.env.MONGODB_URI, {
-      dbName: "app",
+      dbName: "signal",
       useNewUrlParser: true,
       useUnifiedTopology: true,
       connectTimeoutMS: timeout,
