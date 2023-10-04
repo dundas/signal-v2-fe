@@ -1,0 +1,33 @@
+# THE MANIFEST FILE
+
+title: HelloConvo AI Markting Project
+description: A project using AI to perform marketing tasks such as answering questions about brand assets, generating new brand assets, analyzing content, and overall marketing performance.
+languages: es6, typescript, nextjs ^13.4
+
+new_generated_code: Generate all new code to this folder
+  location: 'ai/'
+
+technologies:
+  - Node.js 19.8.1
+  - Nextjs 13.4 (uses app directory structure)
+  - Next Auth (for user authentication and session management)
+  - Radix UI Themes (for styling)
+  - Nodejs
+  - ES6
+  - TypeScript
+  - Mongo
+  - Pinecone
+  - Yarn 
+  - Jest 
+
+
+db_connections:
+  mongoose: 
+    models_folder: src/utils/db/mongoose/models
+    connection_file: src/utils/db/mongoose/connect.ts 
+      functions:
+        - connectDB - connects to db 
+        - disconnectDB - disconnects from db
+  mongo: 
+    ENV: MONGO_URI
+  
