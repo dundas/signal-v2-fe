@@ -1,22 +1,26 @@
 import Message from '@/utils/db/mongoose/models/message'
 import { connectDB } from '@/utils/db/mongoose/connect'
 
-export async function searchMessages(searchOptions) {
+export async function listMessages(searchOptions) {
     await connectDB();
     const query = {};
 
     if (searchOptions.startDate && searchOptions.endDate) {
+        const endOfDay = new Date(searchOptions.endDate);
+        endOfDay.setDate(endOfDay.getDate() + 1);
         query.createdAt = {
             $gte: new Date(searchOptions.startDate),
-            $lte: new Date(searchOptions.endDate),
+            $lt: endOfDay,
         };
     } else if (searchOptions.startDate) {
         query.createdAt = {
             $gte: new Date(searchOptions.startDate),
         };
     } else if (searchOptions.endDate) {
+        const endOfDay = new Date(searchOptions.endDate);
+        endOfDay.setDate(endOfDay.getDate() + 1);
         query.createdAt = {
-            $lte: new Date(searchOptions.endDate),
+            $lt: endOfDay,
         };
     }
 
