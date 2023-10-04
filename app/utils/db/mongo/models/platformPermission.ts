@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const PlatformPermissionSchema = new mongoose.Schema({
+const platformPermissionSchema = new mongoose.Schema({
     userId: String,
     accessToken: String,
     refreshToken: String,
@@ -13,4 +13,4 @@ const PlatformPermissionSchema = new mongoose.Schema({
     timestamps: true // This will add `createdAt` and `updatedAt` fields
 });
 
-export default mongoose.models.PlatformPermission || mongoose.model('PlatformPermission', PlatformPermissionSchema);
+export default mongoose.models.platformPermission || mongoose.model('platformPermission', platformPermissionSchema);

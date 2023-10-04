@@ -4,7 +4,7 @@ import type { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GitHubProvider from "next-auth/providers/github"
 import { connectDB } from "@/utils/db/mongoose/connect"
-import User from "@/utils/db/mongoose/models/User"
+import User from "@/utils/db/mongo/models/user"
 import bcrypt from "bcrypt"
 
 export const authOptions: AuthOptions = {
