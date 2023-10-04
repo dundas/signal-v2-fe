@@ -3,7 +3,7 @@ import NextAuth from "next-auth"
 import type { AuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GitHubProvider from "next-auth/providers/github"
-import { connectDB } from "@/utils/db/mongoose/connect"
+import { connectDB } from "@/utils/db/mongo/connect"
 import User from "@/utils/db/mongo/models/user"
 import bcrypt from "bcrypt"
 
