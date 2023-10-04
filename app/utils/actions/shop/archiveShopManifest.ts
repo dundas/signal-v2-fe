@@ -1,6 +1,6 @@
 "use client";
 import { connectDB } from "@/utils/db/mongoose/connect";
-import ShopManifest from "@/utils/db/mongoose/models/ShopManifest";
+import ShopManifest from "@/utils/db/mongoose/models/shopManifest";
 
 export async function archiveShopManifest(shopId) {
     await connectDB();
