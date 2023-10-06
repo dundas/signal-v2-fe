@@ -1,7 +1,11 @@
 "use server";
+import EditManifest from "@/components/Manifest/EditManifest"
+
 const ServerParamsPage = ({ params }: { params: { id: string } }) => {
+
+    
   return (
-    <div></div>
+    <EditManifest manifestId={id} /> 
   );
 };
 

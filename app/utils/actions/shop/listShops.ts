@@ -1,3 +1,4 @@
+"use server"; 
 import { connectDB } from "@/utils/db/mongoose/connect";
 import Shop from "@/utils/db/mongoose/models/shop";
 import { listCollections } from "../../db/mongoose/listCollections";
@@ -7,11 +8,11 @@ export async function listShops() {
 
     const shops = await Shop.find();
     console.log("SHOPS: ", shops);
-    await listCollections();
+
 
     if (!shops) {
         throw new Error("No active shops found");
     }
 
-    return shops;
+    return JSON.parse(JSON.stringify(shops));
 }

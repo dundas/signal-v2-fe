@@ -1,14 +1,12 @@
-const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
-
-const Schema = mongoose.Schema;
+import { Schema, model, models } from 'mongoose';
+ 
 
 const shopManifestSchema = new Schema({
     shopId: {
         type: String,
         required: true
     },
-    manifest: {
+    content: {
         type: String,
     },
     status: {
@@ -20,8 +18,9 @@ const shopManifestSchema = new Schema({
         default: false // default is 'false', it will be 'true' when the manifest is archived
     }
 }, {
-    collection: 'shopManifest',
     timestamps: true // adds createdAt and updatedAt fields
 });
 
-module.exports = mongoose.models.ShopManifest || mongoose.model('ShopManifest', shopManifestSchema);
+const ShopManifest = models.ShopManifest ||  model('ShopManifest', shopManifestSchema);
+
+export default ShopManifest;

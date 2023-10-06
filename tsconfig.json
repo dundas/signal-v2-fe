@@ -27,7 +27,7 @@
         "./*"
       ],
       "@/utils/*": [
-        "app/utils/*"
+        "./app/utils/*"
       ]
     },
     "forceConsistentCasingInFileNames": true
