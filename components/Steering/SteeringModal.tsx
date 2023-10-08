@@ -1,15 +1,15 @@
 "use client"
 import React from 'react';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import {  Input  } from "@/components/ui/input"
+import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select } from '@radix-ui/react-select';
 import { Button } from "@/components/ui/button"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
-import { createSteering  } from '@/app/utils/actions/steering/createSteering';
+import { createSteering } from '@/app/utils/actions/steering/createSteering';
 import { updateSteering } from '@/app/utils/actions/steering/updateSteering';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import * as z from "zod"
 import {
   Form,
@@ -25,12 +25,9 @@ const SteeringModal = ({ shop, steering }) => {
   const FormSchema = z.object({
     exampleMessage: z.string({ required_error: "Example message is required." }),
     referenceMessageId: z.string(),
-    userDescription: z.string({ required_error: "User description is required." }) ,
-    incorrectQuery: z.string({ required_error: "Incorrect query is required." }),
-    correctQuery: z.string({ required_error: "Correct query is required." }),
-    status: z.enum(['active', 'inactive']).default('active'),
-    embedding: z.array(z.number()).optional(),
-    summary: z.string().optional(),
+    description: z.string({ required_error: "Steering description is required." }),
+    incorrectQuery: z.string({ required_error: "SQL query is required." }),
+    correctQuery: z.string({ required_error: "SQL query is required." })
   })
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -65,21 +62,73 @@ const SteeringModal = ({ shop, steering }) => {
             </DialogHeader>
             <FormField
               control={form.control}
-              name="exampleMessage"
+              name="incorrectQuery"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Example Message</FormLabel>
+                  <FormLabel>Incorrect Query</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Enter example message"
+                      placeholder="sql query"
                       {...field}
                     />
+
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            {/* Add other fields here */}
+            <FormField
+              control={form.control}
+              name="correctQuery"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Correct Query</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Correct SQL query"
+                      {...field}
+                    />
+
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="exampleMessage"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Example user message</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="Show me yesterday's cac"
+                      {...field}
+                    />
+
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="referenceMessageId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Message Id of incorrect message</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="ex: 6209bd3a59a4b605ee40fd0e"
+                      {...field}
+                    />
+
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+       
             <DialogFooter>
               <Button type="submit">
                 {steering ? 'Update' : 'Add'}

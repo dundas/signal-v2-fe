@@ -1,3 +1,4 @@
+"use server";
 import Steering from "@/utils/db/mongoose/models/steering";
 
 export const createSteering = async (steeringData) => {

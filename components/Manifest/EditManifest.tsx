@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   description: "Edit a shop's manifest.",
 }
 
-export default function EditManifest({ manifest, shop }) {
+export default function EditManifest({ manifest = {}, shop }) {
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
   const router = useRouter()
