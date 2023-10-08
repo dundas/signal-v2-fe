@@ -21,7 +21,7 @@ import {
 const AddManifestModal = ({ shop }) => {
   const router = useRouter()
   const FormSchema = z.object({
-    manifest: z
+    content: z
       .string()
       .min(10, {
         message: "Manifest must be at least 10 characters.",
@@ -69,7 +69,7 @@ const AddManifestModal = ({ shop }) => {
 
             <FormField
               control={form.control}
-              name="manifest"
+              name="content"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Manifest Details</FormLabel>

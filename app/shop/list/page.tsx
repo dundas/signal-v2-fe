@@ -9,28 +9,36 @@ import {
 } from "@/components/ui/table"
 import { listShops } from "@/app/utils/actions/shop/listShops"
 import AddManifestModal from "@/components/Manifest/AddManifestModal"
-async function ShopList() {
+import { Button } from "@/components/ui/button"
+import Link from 'next/link'
 
+async function ShopList() {
   const shopList = await listShops()
-  console.log(shopList)
+
   return (
     <Table>
       <TableCaption>Active Shops.</TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead className="w-[100px]">Shop Name</TableHead>
-          <TableHead></TableHead>
-
+          <TableHead>Manifest</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {shopList.map((shop) => (
-          <TableRow key={shop._id}>
-            <TableCell className="font-medium">{shop.shop}</TableCell>
+          <TableRow key={shop.shop._id}>
+            <TableCell className="font-medium">{shop.shop.shop}</TableCell>
             <TableCell>
-              <AddManifestModal shop={shop} />
+              {shop.shopManifest ? (
+                <Button>
+                  <Link href={`/manifest/${shop.shopManifest._id}`}>
+                    Edit Manifest
+                  </Link>
+                </Button>
+              ) : (
+                <AddManifestModal shop={shop.shop} />
+              )}
             </TableCell>
-
           </TableRow>
         ))}
       </TableBody>

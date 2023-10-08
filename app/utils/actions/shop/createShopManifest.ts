@@ -14,6 +14,7 @@ export async function createShopManifest(shopManifestDetails) {
         }
 
         const shopManifest = new ShopManifest(shopManifestDetails);
+        console.log("shopManifest: ", shopManifestDetails);
         await shopManifest.save();
         return { success: true, results: JSON.parse(JSON.stringify(shopManifest)) }
     } catch (err) {
