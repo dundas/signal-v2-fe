@@ -26,8 +26,9 @@ const SteeringListPage = async ({ params }) => {
   let shopDetails = await getShopDetails(id)
   console.log("SHOP DETAILS", shopDetails)
 
-  const steeringList = await listSteerings(id)
+  const steeringList = await listSteerings()
   console.log("STEERING LIST", steeringList)
+  const steeringResults = JSON.parse(JSON.stringify(steeringList.result))
 
   return (
     <Table>
@@ -36,13 +37,14 @@ const SteeringListPage = async ({ params }) => {
         <TableRow>
           <TableHead className="w-[100px]">Steering ID</TableHead>
           <TableHead>Steering Details</TableHead>
-          <TableHead><SteeringModal shop={shopDetails.shop}  /></TableHead>
+          <TableHead></TableHead>
+          <TableHead><SteeringModal  /></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {steeringList.length > 0 ? steeringList.map((steering) => (
+        {steeringResults.length > 0 ? steeringResults.map((steering) => (
           <TableRow key={steering._id}>
-            <TableCell className="font-medium">{steering._id}</TableCell>
+            <TableCell className="font-medium">{steering.description}</TableCell>
             <TableCell>
               <Link href={`/steering/${steering._id}`}>
                 View Details

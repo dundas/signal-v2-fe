@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 
-const SteeringModal = ({ shop, steering }) => {
+const SteeringModal = ({ shop={}, steering={} }) => {
   const router = useRouter()
   const FormSchema = z.object({
     exampleMessage: z.string({ required_error: "Example message is required." }),
@@ -35,10 +35,13 @@ const SteeringModal = ({ shop, steering }) => {
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log("DATA", data)
     let response;
     if (steering) {
+      console.log("UPDATE STEERING")
       response = await updateSteering(steering._id, data);
     } else {
+      console.log("CREATE STEERING")
       response = await createSteering({ shopId: shop._id, ...data });
     }
 
@@ -58,7 +61,7 @@ const SteeringModal = ({ shop, steering }) => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
             <DialogHeader>
-              <DialogTitle>{steering ? 'Edit' : 'Add'} Steering for {shop.domain}</DialogTitle>
+              <DialogTitle>{steering ? 'Edit' : 'Add'} steering feedback</DialogTitle>
             </DialogHeader>
             <FormField
               control={form.control}
@@ -67,8 +70,8 @@ const SteeringModal = ({ shop, steering }) => {
                 <FormItem>
                   <FormLabel>Incorrect Query</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="sql query"
+                    <Textarea
+                      placeholder="SELECT COUNT(order_id) as total_orders FROM data_store.orders_final WHERE shop_name = 'shop_name'"
                       {...field}
                     />
 
@@ -84,8 +87,8 @@ const SteeringModal = ({ shop, steering }) => {
                 <FormItem>
                   <FormLabel>Correct Query</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Correct SQL query"
+                    <Textarea
+                      placeholder="SELECT COUNT(order_id) as total_orders FROM data_store.orders_final WHERE shop_name = 'shop_name' AND order_date = '2021-07-01"
                       {...field}
                     />
 
@@ -102,7 +105,7 @@ const SteeringModal = ({ shop, steering }) => {
                   <FormLabel>Example user message</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="Show me yesterday's cac"
+                      placeholder="'Show me yesterday's CAC'"
                       {...field}
                     />
 
@@ -128,7 +131,25 @@ const SteeringModal = ({ shop, steering }) => {
                 </FormItem>
               )}
             />
-       
+
+            <FormField
+              control={form.control}
+              name="description"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Summarization of Fix</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      placeholder="'When a user asks for CAC the query should to include the date of the order.'"
+                      {...field}
+                    />
+
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <DialogFooter>
               <Button type="submit">
                 {steering ? 'Update' : 'Add'}

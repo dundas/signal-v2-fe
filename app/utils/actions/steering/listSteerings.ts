@@ -1,15 +1,18 @@
-"use server"; 
+"use server";
 import Steering from "@/utils/db/mongoose/models/steering";
 import { connectDB } from "@/utils/db/mongoose/connect";
 
-export const listSteerings = async (shopId, startDate=null, endDate=null, page = 1, limit = 10) => {
+export const listSteerings = async (shopId = null, startDate = null, endDate = null, page = 1, limit = 10) => {
     try {
         await connectDB();
         // calculate the number of documents to skip
         const skip = (page - 1) * limit;
 
         // Create base query
-        let query = { shopId };
+        let query = {};
+        if (shopId) {
+            query.shopId = shopId;
+        }
 
         // If both startDate and endDate are provided, add date range to query
         if (startDate && endDate) {

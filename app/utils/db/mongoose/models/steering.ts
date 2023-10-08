@@ -8,9 +8,9 @@ const SteeringSchema = new Schema({
     referenceMessageId: {
         type: String 
     },
-    userDescription: {
+    description: {
         type: String,
-        required: [true, 'User description is required.'],
+        required: [true, 'Description is required.'],
     },
     incorrectQuery: {
         type: String,
