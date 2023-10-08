@@ -8,6 +8,7 @@ import { Separator } from "@/components/ui/separator"
 import { useToast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 
+import { useState } from "react"
 import { ToastAction } from "@/components/ui/toast"
 import { udpateShopManifest } from "@/app/utils/actions/shop/updateShopManifest";
 import {
@@ -37,6 +38,7 @@ export const metadata: Metadata = {
 }
 
 export default function EditManifest({ manifest, shop }) {
+  const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
   const router = useRouter()
   const FormSchema = z.object({
@@ -51,27 +53,35 @@ export default function EditManifest({ manifest, shop }) {
   })
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    // do something with the data 
-   
-    const result = await udpateShopManifest(manifest._id, { content: data.content })
-    console.log("RESPONSE", result)
-    if (result.success === true) {
-     
-      toast({
-        title: "Success",
-        description: "Manifest updated successfully.",
-      })
+    setIsLoading(true)
 
+    try {
+      const result = await udpateShopManifest(manifest._id, { content: data.content })
 
-    } {
-      // display error message
+      if (result.success) {
+        toast({
+          title: "Success",
+          description: "Manifest updated successfully.",
+        })
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          action: <Button>Try again</Button>,
+        })
+      }
+    } catch (error) {
+      console.error("Error updating manifest:", error)
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
-        action: <ToastAction altText="Try again">Try again</ToastAction>,
+        action: <Button>Try again</Button>,
       })
     }
+
+    setIsLoading(false)
   }
 
   return (
