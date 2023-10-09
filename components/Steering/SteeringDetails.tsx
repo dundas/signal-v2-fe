@@ -17,7 +17,7 @@ export default function SteeringDetails({ steering }) {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Steering Details</CardTitle>
+                <CardTitle><Link href={`/steering`}>Steerings </Link> &raquo; Steering Details</CardTitle>
                 <CardDescription></CardDescription>
             </CardHeader>
             <CardContent className="grid gap-6">
@@ -58,14 +58,14 @@ export default function SteeringDetails({ steering }) {
                 </div>
             </CardContent>
             <CardFooter>
-                <Flex direction="row">
-
-                    <Button variant="outline" className="w-full">
-                        <Link href={`/steering/${steering._id}/edit`}>Edit Steering</Link>
-                    </Button>
-                    <DeleteSteeringModal steering={steering} />
+                <Flex direction="row" className="justify-end space-x-4">
+                    <Link href={`/steering/${steering._id}/edit`}>
+                        <Button variant="outline" className="w-full">
+                            Edit Steering
+                        </Button>
+                    </Link>
+                    {steering._id && <DeleteSteeringModal steering={steering} />}
                 </Flex>
-
             </CardFooter>
         </Card>
     )

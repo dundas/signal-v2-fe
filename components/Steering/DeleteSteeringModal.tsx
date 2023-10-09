@@ -52,7 +52,7 @@ const DeleteSteeringModal = ({ steering }) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>Delete</AlertDialogTrigger>
+      <AlertDialogTrigger><Button> Delete</Button></AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -62,10 +62,8 @@ const DeleteSteeringModal = ({ steering }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>
-            <Button onClick={handleDelete} variant="destructive">
+          <AlertDialogAction onClick={handleDelete} >
               Delete
-            </Button>
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

@@ -31,6 +31,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { useRouter } from 'next/navigation';
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Manifest Editor",
@@ -86,7 +87,7 @@ export default function EditManifest({ manifest = {}, shop }) {
 
   return (
     <>
-      <div className="hidden h-full flex-col md:flex">
+      <div className="h-full flex-col md:flex">
         <div className="container flex flex-col items-start justify-between space-y-2 py-4 sm:flex-row sm:items-center sm:space-y-0 md:h-16">
           <h2 className="text-lg font-semibold">
             Edit Manifest for {shop.domain}
@@ -97,7 +98,6 @@ export default function EditManifest({ manifest = {}, shop }) {
           <div className="container h-full py-6">
             <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_200px]">
               <div className="md:order-1">
-
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="w-full space-y-6">
                     <TabsContent value="complete" className="mt-0 border-0 p-0">
@@ -120,9 +120,13 @@ export default function EditManifest({ manifest = {}, shop }) {
                             </FormItem>
                           )}
                         />
-
-                        <div className="flex items-center space-x-2">
-                          <Button>Submit</Button>
+                        <div className="flex items-center justify-end space-x-4">
+                        <Link href={`/shop/list`}>
+                          <Button variant="outline">
+                           Cancel
+                          </Button>
+                          </Link>
+                          <Button type="submit">Submit</Button>
                         </div>
                       </div>
                     </TabsContent>

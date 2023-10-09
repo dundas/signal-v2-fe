@@ -19,6 +19,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form"
+import Link from 'next/link';
 
 const SteeringForm = ({ shop = {}, steering = {} }) => {
     const router = useRouter()
@@ -68,89 +69,112 @@ const SteeringForm = ({ shop = {}, steering = {} }) => {
                     <h2 className="text-2xl font-bold tracking-tight">{steering._id ? 'Edit' : 'Add'} steering feedback</h2>
                     <Form {...form}>
                         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                            <FormField
-                                control={form.control}
-                                name="incorrectQuery"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Incorrect Query</FormLabel>
-                                        <FormControl>
-                                            <Textarea
-                                                placeholder="SELECT COUNT(order_id) as total_orders FROM data_store.orders_final WHERE shop_name = 'shop_name'"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
+                            <Flex direction="column">
+                                <FormField
+                                    control={form.control}
+                                    name="incorrectQuery"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Incorrect Query</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="SELECT COUNT(order_id) as total_orders FROM data_store.orders_final WHERE shop_name = 'shop_name'"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="correctQuery"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Correct Query</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="SELECT COUNT(order_id) as total_orders FROM data_store.orders_final WHERE shop_name = 'shop_name' AND order_date = '2021-07-01"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="exampleMessage"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Example user message</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="'Show me yesterday's CAC'"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="referenceMessageId"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Message Id of incorrect message</FormLabel>
+                                            <FormControl>
+                                                <Input
+                                                    placeholder="ex: 6209bd3a59a4b605ee40fd0e"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                                <FormField
+                                    control={form.control}
+                                    name="description"
+                                    render={({ field }) => (
+                                        <FormItem>
+                                            <FormLabel>Summarization of Fix</FormLabel>
+                                            <FormControl>
+                                                <Textarea
+                                                    placeholder="'When a user asks for CAC the query should to include the date of the order.'"
+                                                    {...field}
+                                                />
+                                            </FormControl>
+                                            <FormMessage />
+                                        </FormItem>
+                                    )}
+                                />
+                            </Flex>
+
+                            <Flex direction="row" className="justify-end space-x-4">
+
+
+                                {steering._id ? (
+                                    <Link href={`/steering/${steering._id}`}>
+                                        <Button variant="outline">
+                                            Cancel
+                                        </Button>
+                                    </Link>
+                                ) : (
+                                    <Link href={`/steering/`}>
+                                        <Button variant="outline" >
+                                            Cancel
+                                        </Button>
+                                    </Link>
                                 )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="correctQuery"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Correct Query</FormLabel>
-                                        <FormControl>
-                                            <Textarea
-                                                placeholder="SELECT COUNT(order_id) as total_orders FROM data_store.orders_final WHERE shop_name = 'shop_name' AND order_date = '2021-07-01"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="exampleMessage"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Example user message</FormLabel>
-                                        <FormControl>
-                                            <Textarea
-                                                placeholder="'Show me yesterday's CAC'"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="referenceMessageId"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Message Id of incorrect message</FormLabel>
-                                        <FormControl>
-                                            <Input
-                                                placeholder="ex: 6209bd3a59a4b605ee40fd0e"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <FormField
-                                control={form.control}
-                                name="description"
-                                render={({ field }) => (
-                                    <FormItem>
-                                        <FormLabel>Summarization of Fix</FormLabel>
-                                        <FormControl>
-                                            <Textarea
-                                                placeholder="'When a user asks for CAC the query should to include the date of the order.'"
-                                                {...field}
-                                            />
-                                        </FormControl>
-                                        <FormMessage />
-                                    </FormItem>
-                                )}
-                            />
-                            <Button type="submit">
-                                {steering._id ? 'Update' : 'Add'}
-                            </Button>
+
+
+
+                                <Button type="submit">
+                                    {steering._id ? 'Update' : 'Add'}
+                                </Button>
+                            </Flex>
                         </form>
                     </Form>
                 </Flex>

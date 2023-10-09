@@ -32,7 +32,7 @@ const SteeringListPage = async ({ params }) => {
           <TableHead className="w-[100px]">Steering ID</TableHead>
           <TableHead>Steering Details</TableHead>
           <TableHead></TableHead>
-          <TableHead><SteeringModal  /></TableHead>
+          <TableHead><Link href={`/steering/create`}><Button>New</Button></Link></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -41,7 +41,10 @@ const SteeringListPage = async ({ params }) => {
             <TableCell className="font-medium">{steering.description}</TableCell>
             <TableCell>
               <Link href={`/steering/${steering._id}`}>
-                View Details
+                <Button>
+                  View Details
+                </Button>
+
               </Link>
             </TableCell>
             <TableCell>
