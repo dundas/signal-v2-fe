@@ -10,7 +10,7 @@ export async function getShopDetails(shopId) {
             throw new Error("No Shop found");
         }
 
-        return { success: true, shop: JSON.parse(JSON.stringify(shop)) };
+        return { success: true, result: JSON.parse(JSON.stringify(shop)) };
     } catch (error) {
         console.log(error);
         return { success: false, message: error.message };

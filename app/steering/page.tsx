@@ -15,16 +15,10 @@ import { Button } from "@/components/ui/button";
 import { getShopDetails } from "@/app/utils/actions/shop/getShopDetails";
 import Link from "next/link";
 import SteeringModal from "@/components/Steering/SteeringModal";
-
+import DeleteSteeringModal from "@/components/Steering/DeleteSteeringModal";
 const SteeringListPage = async ({ params }) => {
   console.log("PARAMS", params)
-
-  const { id } = params;
-
   await connectDB()
-
-  let shopDetails = await getShopDetails(id)
-  console.log("SHOP DETAILS", shopDetails)
 
   const steeringList = await listSteerings()
   console.log("STEERING LIST", steeringList)
@@ -49,6 +43,9 @@ const SteeringListPage = async ({ params }) => {
               <Link href={`/steering/${steering._id}`}>
                 View Details
               </Link>
+            </TableCell>
+            <TableCell>
+              <DeleteSteeringModal steering={steering} />
             </TableCell>
           </TableRow>
         )) : (

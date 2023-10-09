@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { getShopDetails } from "@/app/utils/actions/shop/getShopDetails";
 import Link from "next/link";
 import SteeringModal from "@/components/Steering/SteeringModal";
-
+import DeleteSteeringModal from "@/components/Steering/DeleteSteeringModal";
 const SteeringListPage = async ({ params }) => {
   console.log("PARAMS", params)
 
@@ -36,17 +36,20 @@ const SteeringListPage = async ({ params }) => {
         <TableRow>
           <TableHead className="w-[100px]">Steering ID</TableHead>
           <TableHead>Steering Details</TableHead>
-          <TableHead><SteeringModal shop={shopDetails.shop}  /></TableHead>
+          <TableHead><SteeringModal shop={shopDetails.shop} /></TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {steeringList.length > 0 ? steeringList.map((steering) => (
           <TableRow key={steering._id}>
-            <TableCell className="font-medium">{steering._id}</TableCell>
+            <TableCell className="font-medium">{steering.description}</TableCell>
             <TableCell>
               <Link href={`/steering/${steering._id}`}>
                 View Details
               </Link>
+              <TableCell>
+                <DeleteSteeringModal steering={steering} />
+              </TableCell>
             </TableCell>
           </TableRow>
         )) : (

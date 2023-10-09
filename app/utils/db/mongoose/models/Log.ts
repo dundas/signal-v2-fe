@@ -94,6 +94,6 @@ const LogSchema = new Schema({
   timestamps: true // This will add `createdAt` and `updatedAt` fields
 });
 
-const Log = models.LogMemory || model('Log', LogSchema);
+const Log = models.Log || model('Log', LogSchema);
 
 export default Log;

@@ -14,12 +14,13 @@ export const createSteering = async (steeringData) => {
         Incorrect Query:  ${steeringData.incorrectQuery}\n\n
         Correct Query: ${steeringData.correctQuery}`;
 
-        const embeddingResponse = await createOpenAIEmbedding(embeddingString);
+        const embeddingResponse = await createOpenAIEmbedding(embeddingString, null, false);
         steeringData.embedding = embeddingResponse.result[0].embedding;
 
         const newSteering = new Steering(steeringData);
-        await newSteering.save();
-        return { success: true, message: "Steering created successfully", data: newSteering };
+        const steeringResult = await newSteering.save();
+        console
+        return { success: true, message: "Steering created successfully", results: JSON.parse(JSON.stringify(steeringResult)) };
     } catch (error) {
         console.log(error);
         return { success: false, message: error.message };

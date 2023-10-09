@@ -1,4 +1,4 @@
-
+"use server";
 import { v4 as uuidv4 } from "uuid";
 import Log from "../db/mongoose/models/Log";
 import { connectDB } from "../db/mongoose/connect";

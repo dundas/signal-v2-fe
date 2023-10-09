@@ -37,8 +37,9 @@ const SteeringModal = ({ shop={}, steering={} }) => {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log("DATA", data)
     let response;
-    if (steering) {
-      console.log("UPDATE STEERING")
+    if (steering._id) {
+      console.log("UPDATE STEERING", steering)
+      
       response = await updateSteering(steering._id, data);
     } else {
       console.log("CREATE STEERING")
