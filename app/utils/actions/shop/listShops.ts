@@ -8,7 +8,7 @@ export async function listShops() {
     await connectDB();
 
     const shops = await Shop.find();
-    console.log("SHOPS: ", shops);
+    //console.log("SHOPS: ", shops);
 
     if (!shops) {
         throw new Error("No active shops found");

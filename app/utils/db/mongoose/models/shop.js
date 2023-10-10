@@ -96,6 +96,23 @@ const shopSchema = new Schema({
     reImportStatus: {
         type: String
     },
+    embedding: {
+        type: [Number]
+    },
+    description: {
+        type: String
+    },
+    bigQueryName: {
+        type: String
+    },
+    sqlName: {
+        type: String
+    },
+    companyName: {
+        type: String
+    },
+
+
 
 }, {
     collection: 'shop'

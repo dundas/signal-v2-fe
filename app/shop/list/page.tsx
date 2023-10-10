@@ -22,6 +22,7 @@ async function ShopList() {
         <TableRow>
           <TableHead >Shop Name</TableHead>
           <TableHead>Manifest</TableHead>
+          <TableHead>Details</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -39,6 +40,7 @@ async function ShopList() {
                 <AddManifestModal shop={shop.shop} />
               )}
             </TableCell>
+            <TableCell className="font-medium"><Link href={`/shop/${shop.shop._id}`}>View Details</Link></TableCell>
           </TableRow>
         ))}
       </TableBody>
