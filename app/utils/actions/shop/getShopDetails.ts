@@ -1,5 +1,5 @@
 import { connectDB } from "@/utils/db/mongoose/connect";
-import Shop from "@/utils/db/mongoose/models/Shop";
+import Shop from "@/utils/db/mongoose/models/shop";
 
 export async function getShopDetails(shopId) {
     try {

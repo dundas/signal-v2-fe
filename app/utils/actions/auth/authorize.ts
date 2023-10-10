@@ -1,5 +1,5 @@
 import { connectDB } from "@/utils/db/mongoose/connect";
-import User from "@/utils/db/mongoose/models/User";
+import User from "@/utils/db/mongoose/models/user";
 export async function authorize(credentials) {
     await connectDB();
 
