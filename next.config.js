@@ -4,6 +4,7 @@ module.exports = {
         serverActions: true,
         esmExternals: true
     },
+    generateEtags: false,
     typescript: {
         ignoreBuildErrors: true,
     },
