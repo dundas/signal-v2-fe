@@ -19,14 +19,14 @@ export default function NavHeader() {
             <NavigationMenuList>
 
                 <NavigationMenuItem>
-                    <Link href="/shop/list" passHref>
+                    <Link href="/shop/list" >
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Shop List
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                    <Link href="/steering"  passHref>
+                    <Link href="/steering" >
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Steerings
                         </NavigationMenuLink>

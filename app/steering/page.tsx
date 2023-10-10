@@ -16,6 +16,8 @@ import { getShopDetails } from "@/app/utils/actions/shop/getShopDetails";
 import Link from "next/link";
 import SteeringModal from "@/components/Steering/SteeringModal";
 import DeleteSteeringModal from "@/components/Steering/DeleteSteeringModal";
+import { Flex, Container, Box } from "@radix-ui/themes";
+
 const SteeringListPage = async ({ params }) => {
   console.log("PARAMS", params)
   await connectDB()
@@ -25,39 +27,45 @@ const SteeringListPage = async ({ params }) => {
   const steeringResults = JSON.parse(JSON.stringify(steeringList.result))
 
   return (
-    <Table>
-      <TableCaption>Steering List</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[100px]">Steering ID</TableHead>
-          <TableHead>Steering Details</TableHead>
-          <TableHead></TableHead>
-          <TableHead><Link href={`/steering/create`}><Button>New</Button></Link></TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {steeringResults.length > 0 ? steeringResults.map((steering) => (
-          <TableRow key={steering._id}>
-            <TableCell className="font-medium">{steering.description}</TableCell>
-            <TableCell>
-              <Link href={`/steering/${steering._id}`}>
-                <Button>
-                  View Details
-                </Button>
+    <Container className={'px-8'}>
 
-              </Link>
-            </TableCell>
-            <TableCell>
-              <DeleteSteeringModal steering={steering} />
-            </TableCell>
-          </TableRow>
-        )) : (
-          <TableRow>
-            <TableCell colSpan={2}>No steerings found</TableCell>
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+      <Box className={'px-8'}>
+        <Flex direction="row" justify="between" align="center" gap="4">
+          <h2 className="text-2xl font-bold">Steering List</h2>
+          <Link href={`/steering/create`}><Button>New</Button></Link>
+        </Flex>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Description</TableHead>
+              <TableHead>Actions</TableHead>
+              <TableHead></TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {steeringResults.length > 0 ? steeringResults.map((steering) => (
+              <TableRow key={steering._id}>
+                <TableCell className="font-medium">{steering.description}</TableCell>
+                <TableCell>
+                  <Link href={`/steering/${steering._id}`}>
+                    <Button>
+                      View Details
+                    </Button>
+                  </Link>
+                </TableCell>
+                <TableCell>
+                  <DeleteSteeringModal steering={steering} />
+                </TableCell>
+              </TableRow>
+            )) : (
+              <TableRow>
+                <TableCell colSpan={3}>No steerings found</TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </Box>
+    </Container>
   );
 };
 

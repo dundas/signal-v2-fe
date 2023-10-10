@@ -30,6 +30,7 @@
     "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
+    "googleapis": "^126.0.1",
     "gpt-tokenizer": "^2.1.2",
     "kerberos": "^2.0.3",
     "lucide-react": "^0.284.0",

@@ -20,7 +20,7 @@ async function ShopList() {
       <TableCaption>Active Shops.</TableCaption>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-[100px]">Shop Name</TableHead>
+          <TableHead >Shop Name</TableHead>
           <TableHead>Manifest</TableHead>
         </TableRow>
       </TableHeader>

@@ -3,7 +3,7 @@ import EditManifest from "@/components/Manifest/EditManifest"
 import { getShopManifest } from "@/app/utils/actions/shop/getShopManifest";
 import ShopManifest from "@/utils/db/mongoose/models/shopManifest";
 import { connectDB } from "@/app/utils/db/mongoose/connect";
-import Shop from "@/app/utils/db/mongoose/models/Shop";
+import Shop from "../../utils/db/mongoose/models/shop";
 const EditManifestPage = async ({ params }) => {
 
   const { id } = params;
