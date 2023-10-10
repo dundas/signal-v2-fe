@@ -9,7 +9,7 @@ module.exports.dbConnect = () => {
 
     console.log('=> using new database connection');
 
-    return mongoose.connect(process.env.MONGO_CONN)
+    return mongoose.connect(process.env.MONGODB_URI)
         .then(db => {
             isConnected = db.connections[0].readyState;
             console.log("CONNECTED: ", isConnected)
