@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google'
 import { Theme } from '@radix-ui/themes';
 import '@radix-ui/themes/styles.css';
 import NavHeader from '@/components/Nav/NavHeader';
+export const dynamic = 'force-dynamic'
 
 const inter = Inter({ subsets: ['latin'] })
 
