@@ -22,12 +22,16 @@ const DeleteSteeringModal = ({ steering }) => {
 
   const handleDelete = async () => {
     try {
+      console.log("STEERING", steering)
+       
       const result = await deleteSteering(steering._id);
+      console.log("DELETE RESULT", result)
 
 
       if (result.success) {
         // redirect user to steering list page
-        router.push(`/steering/`)
+        //router.push(`/steering/`)
+        router.refresh();
         toast({
           title: "Success",
           description: "Steering deleted successfully.",
