@@ -31,4 +31,4 @@ const RulesSchema = new Schema({
 
 const Rules = mongoose.models.Rules || mongoose.model('Rules', RulesSchema);
 
-module.exports = Rules;
+export default Rules;

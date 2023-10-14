@@ -23,4 +23,4 @@ const GlossarySchema = new Schema({
 
 const Glossary = mongoose.models.Glossary || mongoose.model('Glossary', GlossarySchema);
 
-module.exports = Glossary;
+export default Glossary;
