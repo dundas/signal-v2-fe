@@ -26,9 +26,23 @@ export default function NavHeader() {
                     </Link>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
+                    <Link href="/rule" >
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                            Rules
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
                     <Link href="/steering" >
                         <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                             Steerings
+                        </NavigationMenuLink>
+                    </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                    <Link href="/glossary" >
+                        <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                            Glossary
                         </NavigationMenuLink>
                     </Link>
                 </NavigationMenuItem>

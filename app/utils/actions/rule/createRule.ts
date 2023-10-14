@@ -9,10 +9,9 @@ export const createRule = async (ruleData) => {
         ruleData.status = "active";
         ruleData.embedding = [];
 
-        const embeddingString = `Rule: ${ruleData.rule}\n\n 
-        Description: ${ruleData.description}\n\n
-        Example Usage:  ${ruleData.exampleUsage}\n\n
-        Related Rules: ${ruleData.relatedRules}`;
+        const embeddingString = `Rule: ${ruleData.name}\n\n 
+        Description: ${ruleData.description}\n\n 
+        Example Query: ${ruleData.correctQuery}`;
 
         const embeddingResponse = await createOpenAIEmbedding(embeddingString, null, false);
         ruleData.embedding = embeddingResponse.result[0].embedding;

@@ -118,4 +118,5 @@ const shopSchema = new Schema({
     collection: 'shop'
 });
 
-module.exports = mongoose.models.Shop || mongoose.model('Shop', shopSchema);
+const Shop = mongoose.models.Shop || mongoose.model('Shop', shopSchema);
+export default Shop;
