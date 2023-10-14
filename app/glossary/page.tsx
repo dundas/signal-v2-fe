@@ -1,6 +1,6 @@
 "use server";
 import { connectDB } from "@/app/utils/db/mongoose/connect";
-import { listRules } from "@/app/utils/actions/rule/listRules";
+import { listGlossaries } from "@/app/utils/actions/glossary/listGlossaries";
 import {
   Table,
   TableBody,
@@ -12,24 +12,24 @@ import {
 } from "@/components/ui/table"
 import { Button } from "@/components/ui/button";
 import Link from "next/link"; 
-import DeleteRuleModal from "@/components/Rule/DeleteRuleModal";
+import DeleteGlossaryModal from "@/components/Glossary/DeleteGlossaryModal";
 import { Flex, Container, Box } from "@radix-ui/themes";
 
-const RuleListPage = async ({ params }) => {
+const GlossaryListPage = async ({ params }) => {
   console.log("PARAMS", params)
   await connectDB()
 
-  const ruleList = await listRules()
-  console.log("RULE LIST", ruleList)
-  const ruleResults = JSON.parse(JSON.stringify(ruleList.result))
+  const glossaryList = await listGlossaries()
+  console.log("GLOSSARY LIST", glossaryList)
+  const glossaryResults = JSON.parse(JSON.stringify(glossaryList.result))
 
   return (
     <Container className={'px-8'}>
 
       <Box className={'px-8'}>
         <Flex direction="row" justify="between" align="center" gap="4">
-          <h2 className="text-2xl font-bold">Rules</h2>
-          <Link href={`/rule/create`}><Button>New</Button></Link>
+          <h2 className="text-2xl font-bold">Glossary</h2>
+          <Link href={`/glossary/create`}><Button>New</Button></Link>
         </Flex>
         <Table>
           <TableHeader>
@@ -40,23 +40,23 @@ const RuleListPage = async ({ params }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {ruleResults.length > 0 ? ruleResults.map((rule) => (
-              <TableRow key={rule._id}>
-                <TableCell className="font-medium">{rule.description}</TableCell>
+            {glossaryResults.length > 0 ? glossaryResults.map((glossary) => (
+              <TableRow key={glossary._id}>
+                <TableCell className="font-medium">{glossary.term}</TableCell>
                 <TableCell>
-                  <Link href={`/rule/${rule._id}`}>
+                  <Link href={`/glossary/${glossary._id}`}>
                     <Button>
                       View Details
                     </Button>
                   </Link>
                 </TableCell>
                 <TableCell>
-                  <DeleteRuleModal rule={rule} />
+                  <DeleteGlossaryModal glossary={glossary} />
                 </TableCell>
               </TableRow>
             )) : (
               <TableRow>
-                <TableCell colSpan={3}>No rules found</TableCell>
+                <TableCell colSpan={3}>No glossaries found</TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -66,4 +66,4 @@ const RuleListPage = async ({ params }) => {
   );
 };
 
-export default RuleListPage;
+export default GlossaryListPage;
