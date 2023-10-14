@@ -1,6 +1,6 @@
 "use server";
 import { connectDB } from "@/app/utils/db/mongoose/connect";
-import Shop from "@/app/utils/db/mongoose/models/Shop";
+import Shop from "@/app/utils/db/mongoose/models/shop";
 import { listSteerings } from "@/app/utils/actions/steering/listSteerings";
 import {
   Table,
