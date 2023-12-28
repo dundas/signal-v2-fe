@@ -23,6 +23,7 @@ async function ShopList() {
           <TableHead >Shop Name</TableHead>
           <TableHead>Manifest</TableHead>
           <TableHead>Details</TableHead>
+          <TableHead>Orders</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -41,6 +42,7 @@ async function ShopList() {
               )}
             </TableCell>
             <TableCell className="font-medium"><Link href={`/shop/${shop.shop._id}`}>View Details</Link></TableCell>
+            <TableCell className="font-medium"><Link href={`/shop/${shop.shop._id}/orders/load`}>Load Order</Link></TableCell>
           </TableRow>
         ))}
       </TableBody>
