@@ -1,4 +1,5 @@
 "use client";
+"use client";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
@@ -57,66 +58,62 @@ function LoadOrderBatch({ shopDetails }) {
   });
 
   useEffect(() => {
-    async function getOrderQueueCount() {
-      try {
-        const orderQueue = await getOrderQueue({
-          shop: shop.shop,
-          status: "pending",
-        });
-        setPendingOrderQueue(orderQueue);
-        setPendingQueueCount(orderQueue.length);
-      } catch (error) {
-        console.error("Error getting order queue count:", error);
-      }
-    }
     getOrderQueueCount();
   }, [shopDetails]);
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setIsLoading(true);
-
-    console.log("DATA", data.orderIds);
-    const orderIdArray = await formatDelimitedString(data.orderIds);
-    console.log("ORDER ID ARRAY", orderIdArray);
-    const orderResult = await createBatchOrderQueue(shop.shop, orderIdArray);
-    console.log("ORDER RESULT", orderResult);
-
+  async function getOrderQueueCount() {
     try {
+      const orderQueue = await getOrderQueue({
+        shop: shop.shop,
+        status: "pending",
+      });
+      setPendingOrderQueue(orderQueue);
+      setPendingQueueCount(orderQueue.length);
     } catch (error) {
-      console.error("Error updating manifest:", error);
+      console.error("Error getting order queue count:", error);
     }
+  }
 
-    setIsLoading(false);
+  async function onSubmit(data: z.infer<typeof FormSchema>) {
+    try {
+      setIsLoading(true);
+
+      console.log("DATA", data.orderIds);
+      const orderIdArray = await formatDelimitedString(data.orderIds);
+      console.log("ORDER ID ARRAY", orderIdArray);
+      const orderResult = await createBatchOrderQueue(shop.shop, orderIdArray);
+      console.log("ORDER RESULT", orderResult);
+      await getOrderQueueCount();
+
+      setIsLoading(false);
+
+      // Reset the form after successful submission
+      form.reset({ orderIds: "" });
+    } catch (error) {
+      console.error("Error submitting order batch:", error);
+    }
   }
 
   return (
     <>
       <Container>
-        <Flex className="w-m-[800px]" grow={"1"} direction={"row"}>
-          <Box className="w-m-[600px]" grow={"1"}>
+        <Flex className="w-full" grow={"1"} direction={"row"}>
+          <Box className="mt" grow={"1"}>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full space-y-6"
-              >
-                <Flex
-                  className="w-full m-8"
-                  grow={"1"}
-                  direction={"column"}
-                  gap={"4"}
-                >
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <Flex grow={"1"} direction={"column"} gap={"4"}>
                   <Flex grow={"1"} direction={"column"}>
                     <FormField
                       control={form.control}
                       name="orderIds"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Order Id</FormLabel>
+                          <FormLabel>Order List</FormLabel>
                           <FormControl>
                             <Textarea
                               {...field}
                               placeholder="Add list of order ids. One per line."
-                              className="w-full min-h-[300px]"
+                              className="w-full min-h-[300px] mt-4"
                             />
                           </FormControl>
                           <FormMessage />
@@ -131,17 +128,14 @@ function LoadOrderBatch({ shopDetails }) {
               </form>
             </Form>
           </Box>
-          <Box className="w-m-[600px] ml-8 p-4" grow={"1"}>
-            
+          <Box className="w-m-[600px] ml-8" grow={"1"}>
             <Flex direction={"column"}>
-              <></>Pending Orders: {pendingQueueCount}
+              Pending Orders: {pendingQueueCount}
             </Flex>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="w-[100px]">
-                    Pending Order Id 
-                  </TableHead>
+                  <TableHead className="w-[200px]">Order Id</TableHead>
                   <TableHead>Date Added</TableHead>
                 </TableRow>
               </TableHeader>
@@ -158,12 +152,9 @@ function LoadOrderBatch({ shopDetails }) {
             </Table>
           </Box>
         </Flex>
-
-        {orderDetails?.orderId && (
-          <OrderDetailsTable orderDetails={orderDetails} />
-        )}
       </Container>
     </>
   );
 }
+
 export default LoadOrderBatch;

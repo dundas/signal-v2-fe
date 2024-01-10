@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 import LoadOrder from "@/components/Orders/LoadOrder";
 import LoadOrderBatch from "@/components/Orders/LoadOrderBatch";
-import { Box, Separator, Container } from "@radix-ui/themes";
+import { Box, Separator, Container, Flex } from "@radix-ui/themes";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const BrowseOrders = async ({ params }) => {
@@ -43,19 +43,22 @@ const BrowseOrders = async ({ params }) => {
       </Box>
       <Separator />
       <Container>
-        <Tabs defaultValue="single" className="w-[1000px]">
-          <TabsList>
-            <TabsTrigger value="single">Single</TabsTrigger>
-            <TabsTrigger value="batch">Batch</TabsTrigger>
-          </TabsList>
-          <TabsContent value="single">
-            <LoadOrder shopDetails={shopDetails} />
-          </TabsContent>
-          <TabsContent value="batch" className="">
-            {" "}
-            <LoadOrderBatch shopDetails={shopDetails} />
-          </TabsContent>
-        </Tabs>
+        <Flex className="p-8">
+          <Tabs defaultValue="batch" className="w-full">
+            <TabsList>
+              <TabsTrigger value="batch">Batch</TabsTrigger>
+              <TabsTrigger value="single">Single</TabsTrigger>
+            </TabsList>
+           
+            <TabsContent value="batch" className="">
+              {" "}
+              <LoadOrderBatch shopDetails={shopDetails} />
+            </TabsContent>
+            <TabsContent value="single">
+              <LoadOrder shopDetails={shopDetails} />
+            </TabsContent>
+          </Tabs>
+        </Flex>
       </Container>
     </>
   );
