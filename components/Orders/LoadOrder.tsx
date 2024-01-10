@@ -75,12 +75,7 @@ function LoadOrder({ shopDetails }) {
   return (
     <>
       <Container>
-        <Box className="ml-8 mt-4">
-          <h2 className="text-lg font-semibold">
-            Load Order for {shop.domain}
-          </h2>
-        </Box>
-        <Separator />
+        
         <Tabs defaultValue="complete" className="flex-1">
           <Flex className="w-full" grow={"1"}>
             <Form {...form}>
